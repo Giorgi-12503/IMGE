@@ -1,8 +1,10 @@
 {
-  "apiKey": "mock_api_key",
-  "authDomain": "mock_auth_domain",
-  "projectId": "mock_project_id",
-  "storageBucket": "mock_storage_bucket",
-  "messagingSenderId": "mock_sender_id",
-  "appId": "mock_app_id"
+  "projectId": "gen-lang-client-0982078885",
+  "appId": "1:264605743333:web:b82d696a9743ea8b4bbc0c",
+  "apiKey": "AIzaSyBQoNSwql784XnLA9r7MAzNdsMyZW-BR54",
+  "authDomain": "gen-lang-client-0982078885.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-b1361bc4-ed8c-4cba-9301-9e7a526fd7f2",
+  "storageBucket": "gen-lang-client-0982078885.firebasestorage.app",
+  "messagingSenderId": "264605743333",
+  "measurementId": ""
 }
