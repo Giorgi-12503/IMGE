@@ -1,0 +1,8 @@
+{
+  "apiKey": "mock_api_key",
+  "authDomain": "mock_auth_domain",
+  "projectId": "mock_project_id",
+  "storageBucket": "mock_storage_bucket",
+  "messagingSenderId": "mock_sender_id",
+  "appId": "mock_app_id"
+}
