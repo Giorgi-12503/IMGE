@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "Photo": {
+      "title": "Photo",
+      "description": "A photo uploaded to the gallery.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Base64 encoded image data"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "uploadedBy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "createdAt",
+        "uploadedBy"
+      ]
+    }
+  },
+  "firestore": {
+    "/photos/{photoId}": {
+      "schema": {
+        "title": "Photo",
+        "type": "object",
+        "properties": {
+          "url": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "uploadedBy": { "type": "string" }
+        }
+      },
+      "description": "Gallery photos uploaded by the admin."
+    }
+  }
+}

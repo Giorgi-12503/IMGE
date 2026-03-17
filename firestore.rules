@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+             request.auth.token.email == "imgeconstruction@gmail.com" && 
+             request.auth.token.email_verified == true;
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+    function isValidPhoto() {
+      return hasOnlyAllowedFields(['url', 'createdAt', 'uploadedBy']) &&
+             request.resource.data.url is string &&
+             request.resource.data.url.size() < 1000000 && // Under 1MB
+             request.resource.data.createdAt is timestamp &&
+             request.resource.data.uploadedBy is string &&
+             request.resource.data.uploadedBy == request.auth.uid;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+    match /photos/{photoId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidPhoto();
+      allow update: if false; // Photos are immutable, just delete and re-upload
+      allow delete: if isAdmin();
+    }
+  }
+}
