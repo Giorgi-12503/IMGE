@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Phone, Mail, MapPin, Menu, X, HardHat, Hammer, PaintRoller, Wrench, 
@@ -86,7 +86,7 @@ export default function App() {
   const [photos, setPhotos] = useState<{id: string, url: string}[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<{id: string, url: string} | null>(null);
   const [photoToDelete, setPhotoToDelete] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
@@ -133,7 +133,8 @@ export default function App() {
     
     setIsUploading(true);
     try {
-      for (const file of Array.from(e.target.files)) {
+      const files = Array.from(e.target.files) as File[];
+      for (const file of files) {
         const compressedBase64 = await compressImage(file);
         await addDoc(collection(db, "photos"), {
           url: compressedBase64,
@@ -443,7 +444,7 @@ export default function App() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
                   className="relative group aspect-[4/3] overflow-hidden rounded-sm bg-zinc-900 cursor-pointer"
-                  onClick={() => setSelectedPhoto(photo.url)}
+                  onClick={() => setSelectedPhoto(photo)}
                 >
                   <img
                     src={photo.url}
@@ -611,16 +612,32 @@ export default function App() {
             onClick={() => setSelectedPhoto(null)}
           >
             <button 
-              className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors"
+              className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors z-10"
               onClick={() => setSelectedPhoto(null)}
             >
               <X className="w-8 h-8" />
             </button>
+
+            {/* Delete Button inside Viewer - ONLY VISIBLE TO ADMIN */}
+            {isAdmin && (
+              <button 
+                className="absolute top-6 left-6 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-colors z-10 shadow-lg"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPhotoToDelete(selectedPhoto.id);
+                  setSelectedPhoto(null); // Close the viewer to show the confirm modal
+                }}
+              >
+                <Trash2 className="w-5 h-5" />
+                Delete
+              </button>
+            )}
+
             <motion.img
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              src={selectedPhoto}
+              src={selectedPhoto.url}
               alt="Full size project"
               className="max-w-full max-h-full object-contain rounded-sm shadow-2xl"
               onClick={(e) => e.stopPropagation()}
