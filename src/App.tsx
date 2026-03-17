@@ -16,7 +16,7 @@ const translations = {
     hero: { title1: "Join Our", title2: "Team", subtitle: "We are a new company looking for skilled workers to renovate our newly built apartment in Batumi.", btn: "Apply Now" },
     about: { badge: "About Us", title: "Building The Future", p1: "IMGE Construction is a new, ambitious company. We have successfully built the structure of our new apartment and are now moving into the crucial renovation phase.", p2: "We are actively looking for dedicated and skilled workers—painters, electricians, plumbers, and general contractors—to help us bring this apartment to life.", list: ["New Apartment Project", "Looking for Workers", "Competitive Pay"], exp: "New Company" },
     services: { badge: "What We Need", title: "Required Skills", s1: "Renovation", d1: "General interior and exterior renovation.", s2: "Painting", d2: "Professional painting and finishing.", s3: "Electrical", d3: "Wiring and lighting installation.", s4: "Plumbing", d4: "Water systems and bathroom fitting." },
-    projects: { badge: "Progress", title: "Our Work", upload: "Upload Photo", view: "View" },
+    projects: { badge: "Progress", title: "Our Work", upload: "Upload Photo", view: "View", seeMore: "See More", seeLess: "See Less" },
     stats: { s1: "Active Project", s2: "Workers Needed", s3: "Great Team", s4: "Support" },
     contact: { badge: "Join Us", title: "Contact Us", desc: "Are you a skilled worker looking for a great project? Contact us today to join our renovation team.", phone: "Phone", email: "Email", loc: "Location", locVal: "Batumi, Georgia", formName: "Your Name", formPhone: "Phone Number", formMsg: "Your Skills / Message", formBtn: "Send Application" },
     footer: { rights: "IMGE Construction. All rights reserved." }
@@ -26,7 +26,7 @@ const translations = {
     hero: { title1: "შემოუერთდი", title2: "გუნდს", subtitle: "ჩვენ ვართ ახალი კომპანია და ვეძებთ გამოცდილ მუშებს ბათუმში ჩვენი ახალაშენებული აპარტამენტის სარემონტოდ.", btn: "შემოგვიერთდით" },
     about: { badge: "ჩვენ შესახებ", title: "ვაშენებთ მომავალს", p1: "IMGE Construction არის ახალი, ამბიციური კომპანია. ჩვენ წარმატებით ავაშენეთ ჩვენი ახალი აპარტამენტის სტრუქტურა და ახლა გადავდივართ მნიშვნელოვან სარემონტო ფაზაზე.", p2: "ჩვენ აქტიურად ვეძებთ გამოცდილ მუშებს — მღებავებს, ელექტრიკოსებს, სანტექნიკოსებს, რათა დაგვეხმარონ ამ აპარტამენტის დასრულებაში.", list: ["ახალი აპარტამენტის პროექტი", "ვეძებთ მუშებს", "კონკურენტული ანაზღაურება"], exp: "ახალი კომპანია" },
     services: { badge: "რა გვჭირდება", title: "საჭირო უნარები", s1: "რემონტი", d1: "ზოგადი შიდა და გარე რემონტი.", s2: "სამღებრო", d2: "პროფესიონალური სამღებრო სამუშაოები.", s3: "ელექტროობა", d3: "გაყვანილობა და განათების მონტაჟი.", s4: "სანტექნიკა", d4: "წყლის სისტემები და აბაზანის მოწყობა." },
-    projects: { badge: "პროგრესი", title: "ჩვენი ნამუშევრები", upload: "ფოტოს ატვირთვა", view: "ნახვა" },
+    projects: { badge: "პროგრესი", title: "ჩვენი ნამუშევრები", upload: "ფოტოს ატვირთვა", view: "ნახვა", seeMore: "მეტის ნახვა", seeLess: "ნაკლების ნახვა" },
     stats: { s1: "აქტიური პროექტი", s2: "გვჭირდება მუშები", s3: "კარგი გუნდი", s4: "მხარდაჭერა" },
     contact: { badge: "შემოგვიერთდით", title: "კონტაქტი", desc: "ხართ გამოცდილი მუშა და ეძებთ კარგ პროექტს? დაგვიკავშირდით დღესვე.", phone: "ტელეფონი", email: "ელ. ფოსტა", loc: "ადგილმდებარეობა", locVal: "ბათუმი, საქართველო", formName: "თქვენი სახელი", formPhone: "ტელეფონის ნომერი", formMsg: "თქვენი უნარები / შეტყობინება", formBtn: "აპლიკაციის გაგზავნა" },
     footer: { rights: "IMGE Construction. ყველა უფლება დაცულია." }
@@ -36,7 +36,7 @@ const translations = {
     hero: { title1: "Присоединяйтесь к", title2: "Команде", subtitle: "Мы новая компания, ищем квалифицированных рабочих для ремонта нашего недавно построенного апартамента в Батуми.", btn: "Подать заявку" },
     about: { badge: "О нас", title: "Строим Будущее", p1: "IMGE Construction - новая, амбициозная компания. Мы успешно построили каркас нашего нового апартамента и сейчас переходим к важнейшему этапу ремонта.", p2: "Мы активно ищем преданных своему делу и квалифицированных рабочих — маляров, электриков, сантехников — чтобы помочь нам воплотить этот апартамент в жизнь.", list: ["Новый проект апартамента", "Ищем рабочих", "Конкурентная оплата"], exp: "Новая компания" },
     services: { badge: "Что нам нужно", title: "Требуемые навыки", s1: "Ремонт", d1: "Общий внутренний и внешний ремонт.", s2: "Малярные работы", d2: "Профессиональная покраска и отделка.", s3: "Электрика", d3: "Монтаж проводки и освещения.", s4: "Сантехника", d4: "Системы водоснабжения и установка сантехники." },
-    projects: { badge: "Прогресс", title: "Наша Работа", upload: "Загрузить фото", view: "Смотреть" },
+    projects: { badge: "Прогресс", title: "Наша Работа", upload: "Загрузить фото", view: "Смотреть", seeMore: "Показать больше", seeLess: "Скрыть" },
     stats: { s1: "Активный проект", s2: "Нужны рабочие", s3: "Отличная команда", s4: "Поддержка" },
     contact: { badge: "Присоединяйтесь", title: "Контакты", desc: "Вы квалифицированный рабочий, ищущий отличный проект? Свяжитесь с нами сегодня.", phone: "Телефон", email: "Email", loc: "Местоположение", locVal: "Батуми, Грузия", formName: "Ваше имя", formPhone: "Номер телефона", formMsg: "Ваши навыки / Сообщение", formBtn: "Отправить заявку" },
     footer: { rights: "IMGE Construction. Все права защищены." }
@@ -89,6 +89,7 @@ export default function App() {
   const [selectedPhoto, setSelectedPhoto] = useState<{id: string, url: string} | null>(null);
   const [photoToDelete, setPhotoToDelete] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const t = translations[lang];
   const isAdmin = user?.email === 'imgeconstruction@gmail.com' || user?.email === 'giorgimamuladze21@gmail.com';
@@ -320,7 +321,7 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-zinc-950">
+      <section id="about" className="py-16 md:py-24 bg-zinc-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div 
@@ -372,7 +373,7 @@ export default function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 bg-zinc-900">
+      <section id="services" className="py-16 md:py-24 bg-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-amber-400 font-bold tracking-widest uppercase mb-2">{t.services.badge}</h2>
@@ -404,7 +405,7 @@ export default function App() {
       </section>
 
       {/* Projects / Gallery Section */}
-      <section id="projects" className="py-24 bg-zinc-950">
+      <section id="projects" className="py-16 md:py-24 bg-zinc-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
@@ -437,7 +438,7 @@ export default function App() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {photos.map((photo, index) => (
+              {photos.slice(0, visibleCount).map((photo, index) => (
                 <motion.div
                   key={photo.id}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -473,6 +474,28 @@ export default function App() {
               ))}
             </div>
           )}
+
+          {/* See More / See Less Buttons */}
+          {photos.length > 6 && (
+            <div className="mt-10 flex justify-center gap-4">
+              {visibleCount < photos.length && (
+                <button
+                  onClick={() => setVisibleCount(prev => prev + 6)}
+                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors"
+                >
+                  {t.projects.seeMore}
+                </button>
+              )}
+              {visibleCount > 6 && (
+                <button
+                  onClick={() => setVisibleCount(6)}
+                  className="bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-300 px-8 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors"
+                >
+                  {t.projects.seeLess}
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
@@ -496,7 +519,7 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-zinc-900">
+      <section id="contact" className="py-16 md:py-24 bg-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16">
             <div>
@@ -548,7 +571,7 @@ export default function App() {
                     id="name"
                     name="name"
                     required
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-4 py-3 text-base text-white focus:outline-none focus:border-amber-400 transition-colors"
                     placeholder="John Doe"
                   />
                 </div>
@@ -559,7 +582,7 @@ export default function App() {
                     id="phone"
                     name="phone"
                     required
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-4 py-3 text-base text-white focus:outline-none focus:border-amber-400 transition-colors"
                     placeholder="+995 ..."
                   />
                 </div>
@@ -570,7 +593,7 @@ export default function App() {
                     name="message"
                     required
                     rows={4}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors resize-none"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-4 py-3 text-base text-white focus:outline-none focus:border-amber-400 transition-colors resize-none"
                     placeholder="..."
                   ></textarea>
                 </div>
@@ -608,31 +631,9 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-zinc-950/90 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-zinc-950/95 p-4 backdrop-blur-md"
             onClick={() => setSelectedPhoto(null)}
           >
-            <button 
-              className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors z-10"
-              onClick={() => setSelectedPhoto(null)}
-            >
-              <X className="w-8 h-8" />
-            </button>
-
-            {/* Delete Button inside Viewer - ONLY VISIBLE TO ADMIN */}
-            {isAdmin && (
-              <button 
-                className="absolute top-6 left-6 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-colors z-10 shadow-lg"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setPhotoToDelete(selectedPhoto.id);
-                  setSelectedPhoto(null); // Close the viewer to show the confirm modal
-                }}
-              >
-                <Trash2 className="w-5 h-5" />
-                Delete
-              </button>
-            )}
-
             <motion.img
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
@@ -643,6 +644,28 @@ export default function App() {
               onClick={(e) => e.stopPropagation()}
               referrerPolicy="no-referrer"
             />
+
+            <button 
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-zinc-900/50 hover:bg-zinc-900 text-white p-3 rounded-full backdrop-blur-sm transition-colors z-[70]"
+              onClick={() => setSelectedPhoto(null)}
+            >
+              <X className="w-6 h-6 md:w-8 md:h-8" />
+            </button>
+
+            {/* Delete Button inside Viewer - ONLY VISIBLE TO ADMIN */}
+            {isAdmin && (
+              <button 
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-red-600 hover:bg-red-500 text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider flex items-center gap-2 transition-colors z-[70] shadow-[0_0_30px_rgba(220,38,38,0.4)] border border-red-500/50"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPhotoToDelete(selectedPhoto.id);
+                  setSelectedPhoto(null); // Close the viewer to show the confirm modal
+                }}
+              >
+                <Trash2 className="w-6 h-6" />
+                Delete Photo
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
