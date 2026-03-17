@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Phone, Mail, MapPin, Menu, X, HardHat, Hammer, PaintRoller, Wrench, 
   Upload, ChevronRight, Globe, Trash2, LogIn, LogOut
@@ -86,9 +86,12 @@ export default function App() {
   const [photos, setPhotos] = useState<{id: string, url: string}[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [photoToDelete, setPhotoToDelete] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const t = translations[lang];
-  const isAdmin = user?.email === 'imgeconstruction@gmail.com';
+  const isAdmin = user?.email === 'imgeconstruction@gmail.com' || user?.email === 'giorgimamuladze21@gmail.com';
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
@@ -146,12 +149,15 @@ export default function App() {
     }
   };
 
-  const handleDeletePhoto = async (id: string) => {
-    if (!isAdmin) return;
+  const confirmDelete = async () => {
+    if (!isAdmin || !photoToDelete) return;
+    setDeleteError(null);
     try {
-      await deleteDoc(doc(db, "photos", id));
-    } catch (error) {
+      await deleteDoc(doc(db, "photos", photoToDelete));
+      setPhotoToDelete(null);
+    } catch (error: any) {
       console.error("Delete error:", error);
+      setDeleteError(error.message || "Failed to delete photo. Check permissions.");
     }
   };
 
@@ -436,7 +442,8 @@ export default function App() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-                  className="relative group aspect-[4/3] overflow-hidden rounded-sm bg-zinc-900"
+                  className="relative group aspect-[4/3] overflow-hidden rounded-sm bg-zinc-900 cursor-pointer"
+                  onClick={() => setSelectedPhoto(photo.url)}
                 >
                   <img
                     src={photo.url}
@@ -451,8 +458,11 @@ export default function App() {
                   {/* Delete Button - ONLY VISIBLE TO ADMIN */}
                   {isAdmin && (
                     <button 
-                      onClick={() => handleDeletePhoto(photo.id)}
-                      className="absolute top-4 right-4 bg-red-500/80 hover:bg-red-500 text-white p-2 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPhotoToDelete(photo.id);
+                      }}
+                      className="absolute top-4 right-4 bg-red-500/80 hover:bg-red-500 text-white p-2 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity z-10"
                       title="Delete Photo"
                     >
                       <Trash2 className="w-5 h-5" />
@@ -589,6 +599,85 @@ export default function App() {
           </p>
         </div>
       </footer>
+
+      {/* Image Viewer Modal */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-zinc-950/90 p-4 backdrop-blur-sm"
+            onClick={() => setSelectedPhoto(null)}
+          >
+            <button 
+              className="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors"
+              onClick={() => setSelectedPhoto(null)}
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              src={selectedPhoto}
+              alt="Full size project"
+              className="max-w-full max-h-full object-contain rounded-sm shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {photoToDelete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-zinc-950/80 p-4 backdrop-blur-sm"
+            onClick={() => setPhotoToDelete(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-zinc-900 border border-zinc-800 p-8 rounded-sm max-w-md w-full text-center shadow-2xl"
+            >
+              <Trash2 className="w-12 h-12 text-red-500 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-2 uppercase tracking-tight">Delete Photo?</h3>
+              <p className="text-zinc-400 mb-6">Are you sure you want to remove this photo from the gallery? This action cannot be undone.</p>
+              
+              {deleteError && (
+                <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-sm mb-6 text-sm">
+                  {deleteError}
+                </div>
+              )}
+
+              <div className="flex gap-4 justify-center">
+                <button
+                  onClick={() => {
+                    setPhotoToDelete(null);
+                    setDeleteError(null);
+                  }}
+                  className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold uppercase tracking-wider rounded-sm transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-wider rounded-sm transition-colors"
+                >
+                  Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
